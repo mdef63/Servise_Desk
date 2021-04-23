@@ -53,13 +53,9 @@
             </form>
           </div>
         </nav>
-
-
                     {% block content %}
                         There is no content
                     {% endblock %}
-
-
     {% if request.user.is_authenticated and request.user.is_staff %}
         <div class="admin-panel allign-items-center">
         <a href="/admin" class="btn btn-outline-info">Admin</a>
@@ -70,9 +66,6 @@
             <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style="{% if detail %}display:block;{% endif %}">Удалить</a>
         {% endblock %}
         </div>
-
-
     {% endif %}
-
 </body>
 </html>
