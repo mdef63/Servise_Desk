@@ -140,10 +140,6 @@ class TicketCreate(View):
 
         if bound_form.is_valid():
             new_ticket = bound_form.save()
-            send_mail('Ваша проблема принята',
-                      new_ticket.description,
-                      settings.EMAIL_HOST_USER,
-                      [new_ticket.email_address])
             return redirect(new_ticket)
 
         return render(request, 'ServiceDesk/ticket_create_form.html', context={'form': bound_form})
