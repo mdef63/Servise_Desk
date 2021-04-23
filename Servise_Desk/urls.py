@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+
+from Servise_Desk.views import redirect_block
 
 urlpatterns = [
+    path('', redirect_block), ###ЭТО КОСТЫЛЬ НЕ ТРОГАТЬ!!!!!
     path('admin/', admin.site.urls),
+    path('servise_desk/', include('engine.urls')),
 ]
+

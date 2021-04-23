@@ -1,0 +1,19 @@
+{% extends 'ServiceDesk/base_template.html' %}
+
+
+
+
+{% block title %}
+    Tickets_list
+{% endblock %}
+
+{% block content %}
+
+        {% include 'ServiceDesk/include/ticket_card.html' %}
+
+        {% include 'ServiceDesk/include/paginator.html' %}
+
+
+
+{% endblock %}
+

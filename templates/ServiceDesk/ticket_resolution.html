@@ -1,0 +1,34 @@
+{% extends 'ServiceDesk/base_template.html' %}
+{% load humanize %}
+
+{% block title %}
+    Resolute ticket - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+                <form class="" action="{{ ticket.get_resolute_url }}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                       {% include 'ServiceDesk/include/ticket.html' %}
+
+                    {% for field in form2 %}
+                        <div class="form-group">
+                            {% if field.errors %}
+                                <div class="allert allert-danger">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        {{ field.help_text }}
+                        {{ field }}
+                        </div>
+
+                    {% endfor %}
+
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" >
+                        Resolute Ticket
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

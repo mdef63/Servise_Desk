@@ -1,0 +1,20 @@
+{% extends 'ServiceDesk/base_template.html' %}
+
+
+{% block title %}
+    Delete Ticket "{{ ticket.title }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <form action="{{ ticket.get_delete_url }}" method="post">
+        {% csrf_token %}
+
+        {% include 'ServiceDesk/include/ticket.html' %}
+        <div class="delete-form">
+            <h4>Вы действительно хотите удалить?</h4>
+                <a href="{{ ticket.get_absolute_url }}">Отмена</a>
+            <button type="submit" class="btn btn-danger" style="border-radius: 7px; margin-left: 10px;">Удалить</button>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'ServiceDesk/base_template.html' %}
+
+
+
+
+{% block title %}
+    Tickets_list
+{% endblock %}
+
+{% block content %}
+    {% load humanize %}
+        <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10" >
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col-2" style="width: 52px; text-align: center">ID</th>
+                    <th scope="col-2">Заголовок</th>
+                    <th scope="col-2" style="width: 150px">Приоритет</th>
+                    <th scope="col-2">Последнее изменение</th>
+                    <th scope="col-2">Описание</th>
+                    <th scope="col-2">Статус</th>
+                    <th scope="col-2">Решение</th>
+                    <th scope="col-2">Время решения</th>
+                </tr>
+              </thead>
+              <tbody>
+                    {% for ticket in tickets.object_list %}
+                        <td><a href="{{ ticket.get_absolute_url }}" class="col-2" style="width: 52px">{{ ticket.id }}</a></td>
+                            <td scope="col-2">{{ ticket.title }}</td>
+                                             {% if ticket.priority < 3 %}
+                                                    <td class="table-danger">
+                                                    {% if ticket.priority == 1 %}
+                                                        Критический
+                                                    {% elif ticket.priority == 2 %}
+                                                        Высокий
+                                                    {% endif %}</td>
+                                                 {% else %}
+                                                    {% if ticket.priority == 3 %}
+                                                        <td class="table-success">
+                                                            Нормальный
+                                                        {% elif ticket.priority == 4 %}
+                                                        <td class="table-info">
+                                                            Низкий
+                                                        {% elif ticket.priority == 5 %}
+                                                        <td class="table-info">
+                                                            Очень низкий
+                                                        {% endif %}
+                                                    </td>
+                                             {% endif %}
+                            <td scope="col-2">{{ ticket.created| naturaltime }}</td>
+                            <td scope="col-2">{{ ticket.description|truncatewords:15 }}</td>
+                            {% if ticket.status == 'Closed' %}
+                                <td scope="col-2">Закрыт</td>
+                            {% endif %}
+                            <td scope="col-2">{{ ticket.resolution|truncatewords:15 }}</td>
+                            <td scope="col-2">{{ ticket.modified|timesince:ticket.created }}</td>
+                        </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+            </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+
+    {% include 'ServiceDesk/include/paginator.html' %}
+
+{% endblock %}
+

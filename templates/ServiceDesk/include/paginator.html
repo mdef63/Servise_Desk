@@ -1,0 +1,35 @@
+   {% if is_paginated %}
+        <div class="footer" style="position: absolute; bottom: 0%;left: 35%;">
+        <div class="container mr-5">
+            <div class="col-6 offset-md-2">
+                <div class="row">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item {% if not prev_url %} disabled {% endif %}">
+                              <a class="page-link" href="{{ prev_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+
+                            {% for n in tickets.paginator.page_range %}
+
+                                {% if tickets.number == n %}
+                                     <li class="page-item active" aria-current="page" style="background-color: #17a2b8">
+                                         <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
+                                     </li>
+
+                                {% elif n > tickets.number|add:-2 and n < tickets.number|add:2 %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            <li class="page-item {% if not next_url %} disabled {% endif %}">
+                              <a class="page-link" href="{{ next_url }}" tabindex="-1" aria-disabled="true">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endif %}

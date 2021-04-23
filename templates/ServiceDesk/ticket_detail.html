@@ -1,0 +1,13 @@
+{% extends 'ServiceDesk/base_template.html' %}
+{% load humanize %}
+
+{% block title %}
+    {{ ticket.title }}
+{% endblock %}
+
+{% block content %}
+    {% include 'ServiceDesk/include/ticket.html' %}
+
+
+
+{% endblock %}

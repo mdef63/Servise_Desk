@@ -1,0 +1,56 @@
+{% extends 'ServiceDesk/base_template.html' %}
+
+
+
+
+{% block title %}
+    Ticket_Stats
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 offset md-2">
+                {% load humanize %}
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col-2">Все тикеты</th>
+                    <th scope="col-2">Открытые тикеты</th>
+                    <th scope="col-2">Взятые тикеты</th>
+                    <th scope="col-2">Закрытые тикеты</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                        <tr>
+                            <td scope="col-2">{{ tickets }}</td>
+                            <td scope="col-2">{{ tickets_open}}</td>
+                            <td scope="col-2">{{ tickets_resolved }}</td>
+                            <td scope="col-2">{{ tickets_closed }}</td>
+
+                        </tr>
+              </tbody>
+            </table>
+                <div class="container-fluid mt-3">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10" >
+                            <table class="table table-bordered">
+                            <tr>
+                                <th scope="col-2">Среднее время решения в часах</th>
+                                <th scope="col-2">Среднее время решения в минутах</th>
+                            </tr>
+                            <tr>
+                                <td scope="col-2">{{ metric_hours|floatformat }}</td>
+                                <td scope="col-2">{{ metric_minutes|floatformat }}</td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
