@@ -9,7 +9,9 @@
                 <form class="" action="{{ ticket.get_resolute_url }}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                        {% include 'ServiceDesk/include/ticket.html' %}
-
+                            <div class="container mt-5">
+                                <div class="row">
+                                     <div class="col-12 offset ">
                     {% for field in form2 %}
                         <div class="form-group">
                             {% if field.errors %}
@@ -17,18 +19,16 @@
                                     {{ field.errors }}
                                 </div>
                             {% endif %}
-                        {{ field.help_text }}
-                        {{ field }}
+                                        {{ field.help_text }}
+                                        {{ field }}
+                                     </div>
+                    {% endfor %}
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" >
+                                    Resolute Ticket
+                                </button>
+                                </div>
+                            </div>
                         </div>
 
-                    {% endfor %}
-
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" >
-                        Resolute Ticket
-                    </button>
-
                 </form>
-            </div>
-        </div>
-    </div>
 {% endblock %}
